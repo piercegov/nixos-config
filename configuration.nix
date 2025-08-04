@@ -132,6 +132,7 @@
   environment.systemPackages = with pkgs; [
     mangohud protonup-qt lutris bottles heroic vscode discord 
     code-cursor warp-terminal gh git nodejs_24 pnpm
+    manuskript
   ];
 
   hardware.graphics = { # double check this
