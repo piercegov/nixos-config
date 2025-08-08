@@ -90,6 +90,11 @@
               userName = "Pierce Governale";
               userEmail = "piercegovernale@gmail.com";
             };
+            
+            programs.zoxide = {
+              enable = true;
+              # options = [ "--cmd" "cd" ];
+            };
 
             home.packages = with pkgs; [
               ripgrep fd tree jq fzf bat eza zoxide just
@@ -109,4 +114,5 @@
     };
   };
 }
+
 
