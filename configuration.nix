@@ -93,7 +93,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -128,6 +127,8 @@
   programs.steam.gamescopeSession.enable = true;
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
+  
+  services.flatpak.enable = true;
   
   environment.systemPackages = with pkgs; [
     mangohud protonup-qt lutris bottles heroic vscode discord 

@@ -61,6 +61,8 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
+          nixpkgs.config.allowUnfree = true;
+
           home-manager.users.pierce = { pkgs, ... }: {
             home.stateVersion = "24.11";
 
@@ -99,6 +101,7 @@
             home.packages = with pkgs; [
               ripgrep fd tree jq fzf bat eza zoxide just
               codex-cli
+              lmstudio
               (zen-browser.packages.${system}.zen-browser)
             ];
           };
@@ -114,5 +117,6 @@
     };
   };
 }
+
 
 
