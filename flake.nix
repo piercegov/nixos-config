@@ -1,5 +1,5 @@
 {
-  description = "NixOS + Home Manager with Zen Browser & Codex CLI";
+  description = "NixOS + Home Manager with Zen Browser";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -13,45 +13,11 @@
   outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
   let
     system = "x86_64-linux";
-
-    overlays = [
-      (final: prev: {
-        codex-cli = final.rustPlatform.buildRustPackage rec {
-          pname = "codex-cli";
-          version = "0.16.0";
-
-          src = final.fetchFromGitHub {
-            owner  = "openai";
-            repo   = "codex";
-            rev    = "rust-v${version}";
-            sha256 = "04ph8ppibd66z25lj66dhygzixxan3ah6n9d1k0hf5j6h2rzw1rf";
-          };
-
-          sourceRoot = "source/codex-rs";
-          cargoHash  = "sha256-zgmiWyWB08v1WQVFzxpC/LGwF+XXbs8iW1d7i9Iw0Q4=";
-          doCheck    = false;
-
-          nativeBuildInputs = [ final.pkg-config ];
-          buildInputs       = [ final.openssl ];
-
-          meta = with final.lib; {
-            description = "Command-line interface for Codex";
-            homepage    = "https://github.com/openai/codex";
-            license     = licenses.mit;
-            mainProgram = "codex";
-          };
-        };
-      })
-    ];
   in {
-    packages.${system}.codex-cli =
-      (import nixpkgs { inherit system overlays; }).codex-cli;
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-        { nixpkgs.overlays = overlays; }
-
         ./configuration.nix
 
         home-manager.nixosModules.home-manager
@@ -100,8 +66,7 @@
 
             home.packages = with pkgs; [
               ripgrep fd tree jq fzf bat eza zoxide just
-              codex-cli
-              lmstudio
+              lmstudio codex
               (zen-browser.packages.${system}.zen-browser)
             ];
           };
