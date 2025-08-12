@@ -97,6 +97,7 @@
               wl-clipboard grim slurp wofi swaynotificationcenter waybar
               hyprpaper hypridle hyprlock hyprpicker hyprsysteminfo
               networkmanagerapplet pavucontrol playerctl
+              rustup
               (zen-browser.packages.${system}.zen-browser)
               # themes/fonts
               papirus-icon-theme catppuccin-gtk
@@ -167,24 +168,25 @@
                 }
                 decoration {
                   rounding = 8
-                  
-		  blur {
-		    enabled = true
-		    size = 6
-		    passes = 2
-		    ignore_opacity = true
-		  }                  
+                  blur {
+                    enabled = true
+                    size = 6
+                    passes = 2
+                    ignore_opacity = true
+                  }
                 }
+
                 animations {
                   enabled = true
-                  bezier ease, 0.05, 0.9, 0.1, 1.0
-                  animation windows, 1, 7, ease, slide
-                  animation border, 1, 10, ease
-                  animation fade, 1, 7, ease
+                  #bezier ease, 0.05, 0.9, 0.1, 1.0
+                  #animation windows, 1, 7, ease, slide
+                  #animation border, 1, 10, ease
+                  #animation fade, 1, 7, ease
                 }
                 misc {
                   disable_hyprland_logo = true
                   vfr = true
+                  vrr = true
                 }
                 input {
                   kb_layout = us
@@ -200,6 +202,8 @@
                 bind = $mod SHIFT, L, exec, hyprlock
                 bind = $mod, L, exit
 
+                env = XDG_CURRENT_DESKTOP,Hyprland
+                env = DESKTOP_SESSION,Hyprland
 
                 # autostart (UWSM session)
                 exec-once = waybar
@@ -207,7 +211,7 @@
                 exec-once = nm-applet
                 exec-once = hyprpaper
                 # set wallpaper for all monitors (adjust the path)
-                exec-once = hyprctl hyprpaper reload ,"$HOME/Pictures/wallpapers/forest.jpg"
+                exec-once = hyprctl hyprpaper reload ,"$HOME/Pictures/Wallpapers/dawn_mountain.jpg"
               '';
             };
 
