@@ -167,7 +167,13 @@
                 }
                 decoration {
                   rounding = 8
-                  blur { enabled = true; size = 6; passes = 2; ignore_opacity = true; }
+                  
+		  blur {
+		    enabled = true
+		    size = 6
+		    passes = 2
+		    ignore_opacity = true
+		  }                  
                 }
                 animations {
                   enabled = true
@@ -183,9 +189,7 @@
                 input {
                   kb_layout = us
                   follow_mouse = 1
-                  touchpad { natural_scroll = true }
                 }
-
                 $mod = SUPER
                 bind = $mod, RETURN, exec, kitty
                 bind = $mod, Q, killactive
