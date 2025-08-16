@@ -37,7 +37,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
+    pulse.enable = true;  # provides PulseAudio API for Waybar module
   };
 
   # User
@@ -78,19 +78,21 @@
     xwayland.enable = true;
   };
 
+  # Polkit (system service) — the agent runs in Home Manager
+  security.polkit.enable = true;
+
   # Portals (use Hyprland portal + GTK as fallback)
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config = {
-      common = {
-        default = [ "hyprland" "gtk" ];
-      };
-    };
+    config = { common = { default = [ "hyprland" "gtk" ]; }; };
   };
 
   # GNOME Keyring for secrets
   services.gnome.gnome-keyring.enable = true;
+
+  # PAM entry for hyprlock (required for unlocking)
+  security.pam.services.hyprlock = {};
 
   # System fonts
   fonts.packages = with pkgs; [
@@ -121,10 +123,10 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_RENDERER = "vulkan";
-    # WLR_NO_HARDWARE_CURSORS = "1"; # uncomment if cursor glitches
+    # If the Hyprland env above fixes artifacts, you can keep this commented here:
+    # WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   # State version
   system.stateVersion = "25.05";
 }
-
